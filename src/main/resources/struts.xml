@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <package name="download" extends="struts-default" namespace="/">
+        <action name="download" class="com.mt.action.DownloadAction" method="download">
+            <result name="success" type="stream"><!-- result类型是流(stream)类型 -->
+                <param name="inputName">inputStream</param><!-- inputName指向被下载文件的来源,对应Action中返回的InputStream -->
+                <param name="contentType">${contentType}</param><!-- 下载的内容类型，如图片类型、文档类型等…… -->
+                <param name="contentDisposition">
+                    <!-- 指定文件下载的处理方式，内联(inline)和附件(attachment)两种方式，attachment会弹出文件保存对话框 -->
+                    attachment;filename=${filename}
+                </param>
+                <param name="bufferSize">102400</param>
+            </result>
+        </action>
+
+        <action name="message" class="com.mt.action.MessageAction" method="save">
+            <result name="success">index.jsp</result>
+        </action>
+    </package>
+</struts>
